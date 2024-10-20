@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\v1\ArticleCollection;
+use App\Http\Resources\v1\ArticleResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $article = Article::find(1);
+        return new ArticleResource($article);
     }
 
     /**
@@ -21,7 +24,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -29,7 +32,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return new ArticleCollection(Article::all());
     }
 
     /**
@@ -47,4 +50,5 @@ class ArticleController extends Controller
     {
         //
     }
+
 }
