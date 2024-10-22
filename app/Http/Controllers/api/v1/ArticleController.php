@@ -15,8 +15,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $article = Article::find(1);
-        return new ArticleResource($article);
+        return new ArticleCollection(Article::all());
     }
 
     /**
@@ -32,7 +31,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return new ArticleCollection(Article::all());
+        return (new ArticleResource($article))
+            ->response()->setStatusCode(200);
     }
 
     /**
