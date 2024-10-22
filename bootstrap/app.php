@@ -34,7 +34,7 @@ return Application::configure(basePath: dirname(__DIR__))
                         'code' => '4405',
                         'status_code' => $e->getStatusCode()
                     ]
-                ]);
+                ], 404);
             }
         });
     })->create();
