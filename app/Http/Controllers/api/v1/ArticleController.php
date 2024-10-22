@@ -51,8 +51,12 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         $validatedData = $request->validate([
-            'title' => ['max:50', 'required', Rule::unique('articles')->ignore($article->id)],
-            'body' => ['required', 'min:10']
+            'title' => [
+                'max:50',
+                'sometimes',
+                Rule::unique('articles', 'title')->ignore($article->title, 'title')
+            ],
+            'body' => ['sometimes', 'min:10']
         ]);
         $validatedData['slug'] = Str::slug($validatedData['title']);
         $validatedData['author_id'] = Auth::id() ?? 1;
